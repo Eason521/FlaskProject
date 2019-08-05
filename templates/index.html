@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <th>姓名：</th>
+            <th>年龄：</th>
+            <th>电话：</th>
+        </thead>
+        <tbody>
+        {% for student in student_lists %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.age }}</td>
+            <td>{{ student.phone }}</td>
+        {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+
+
+</body>
+</html>
