@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>首页</title>
-</head>
-<body>
-    <table>
+{% extends "base.html" %}
+{% block title %}
+{% endblock %}
+{% block content %}
+    <table class="table table-bordered">
         <thead>
             <th>姓名：</th>
             <th>年龄：</th>
@@ -22,6 +19,4 @@
         </tbody>
     </table>
 
-
-</body>
-</html>
+{% endblock %}
