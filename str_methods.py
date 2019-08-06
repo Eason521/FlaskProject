@@ -212,9 +212,16 @@ def rjust_demo(): #返回一个原字符串，右对齐，左边用空格填充�
 def rpartition_demo(): #根据指定参数从右边搜索分隔符，将字符分割为三部分，若指定字符串不存在则返回的第一个参数为原字符串，其他为空
     a = "abcdefg"
     print(a.rpartition("d"))
-rpartition_demo()
+# rpartition_demo()
 
-# rsplit',\
+def rsplit_demo():  #分割字符串
+    a = "abcdecfg"
+    print(a.rsplit("c"))
+rsplit_demo()
+
+
+
+# ',\
 # 'rstrip',
 # 'split',
 # 'splitlines','
