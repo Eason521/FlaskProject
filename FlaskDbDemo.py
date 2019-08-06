@@ -17,6 +17,9 @@ models = SQLAlchemy(app) #关联sqlalchemy和flask应用
 
 session = models.session()
 
+# class Base_obj(models.Model):
+
+
 class Students(models.Model):   #学生表
     __tablename__ = "students"  #表名称
     id = models.Column(models.Integer,primary_key=True,autoincrement=True)
@@ -69,16 +72,64 @@ class Teachers(models.Model):
 
 # models.drop_all()
 # models.create_all()
+"""插入数据"""
+# t1 = Teachers(name="小邓",age=28,gender=1,course_id=1)
+# session.add(t1)
+# session.commit()
+#
+# t2 = Teachers()
+# t2.name ="小段"
+# t2.age = 23
+# t2.gender = 0
+# t2.course_id = 1
+# session.add_all([t1,t2])
+# session.commit()
 
-t1 = Teachers(name="小邓",age=28,gender=1,course_id=1)
-session.add(t1)
-session.commit()
+# course1 = Course()
+# course1.label ="python"
+# course1.description = "人生苦短，我用Python"
+# course2 = Course()
+# course2.label = "java"
+# course2.description = "人生若短，我用java"
+# course3 = Course()
+# course3.label = "php"
+# course3.description = "世界上最好的语言*_*"
+#
+# session.add_all([course1,course2,course3])
+# session.commit()
 
-t2 = Teachers()
-t2.name ="小段"
-t2.age = 23
-t2.gender = 0
-t2.course_id = 1
-session.add_all([t1,t2])
+"""查询数据"""
+# teachers = Teachers.query.all()
+# print(teachers)
+# teachers = Teachers.query.first()
+# print(teachers)
+
+# teachers = Teachers.query.get(3)
+# print(teachers)
+
+# teachers = Teachers.query.filter_by(id=2).all()
+# print(teachers)
+
+# 排序
+# teachers = Teachers.query.order_by("age").all()
+# print(teachers)
+# teachers = Teachers.query.order_by(models.desc("age")).all()
+# print(teachers)
+
+#offset 偏移量  limit 返回条数
+# teachers = Teachers.query.offset(1).limit(2).all()
+# print(teachers)
+
+# """修改数据"""
+# t = Teachers.query.get(1)
+# print(t.name)
+# t.name = "噔噔噔"
+# session.add(t)
+# session.commit()
+
+"""删除数据"""
+
+t = Teachers.query.get(3)
+session.delete(t)
 session.commit()
 
