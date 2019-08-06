@@ -17,54 +17,62 @@ models = SQLAlchemy(app) #关联sqlalchemy和flask应用
 
 session = models.session()
 
-# class Base_obj(models.Model):
-
-
-class Students(models.Model):   #学生表
-    __tablename__ = "students"  #表名称
+class BaseModel(models.Model):
+    __abstract__ = True #抽象表为True 代表当前类为抽象类，不会创建表
     id = models.Column(models.Integer,primary_key=True,autoincrement=True)
+
+    def save(self):
+        session.add(self)
+        session.commit()
+    def delete_obj(self):
+        session.delete(self)
+        session.commit()
+
+class Students(BaseModel):   #学生表
+    __tablename__ = "students"  #表名称
+    # id = models.Column(models.Integer,primary_key=True,autoincrement=True)
     name = models.Column(models.String(32))
     age = models.Column(models.Integer)
     gender = models.Column(models.Integer) #0 男 1 女 2 unknown
 
 
-class Course(models.Model): #课程
+class Course(BaseModel): #课程
     __tablename__ = "course"
-    id = models.Column(models.Integer,primary_key=True,autoincrement=True)
+    # id = models.Column(models.Integer,primary_key=True,autoincrement=True)
     label = models.Column(models.String(32))
     description = models.Column(models.Text)
     # stu_id = models.Column(models.Integer,models.ForeignKey(Student.id))
 
-class Stu_Cou(models.Model):
+class Stu_Cou(BaseModel):
     __tablename__ = "stu_cou"
-    id = models.Column(models.Integer, primary_key=True, autoincrement=True)
+    # id = models.Column(models.Integer, primary_key=True, autoincrement=True)
     course_id = models.Column(models.Integer,models.ForeignKey("course.id"))
     student_id = models.Column(models.Integer,models.ForeignKey("students.id"))
 
-class Grade(models.Model):  #分数
+class Grade(BaseModel):  #分数
     __tablename__ = "grade"
-    id = models.Column(models.Integer,primary_key=True,autoincrement=True)
+    # id = models.Column(models.Integer,primary_key=True,autoincrement=True)
     grade = models.Column(models.Float, default=0)
     course_id = models.Column(models.Integer, models.ForeignKey("course.id"))
     student_id = models.Column(models.Integer, models.ForeignKey("students.id"))
-class Attendance(models.Model):
+class Attendance(BaseModel):
     """
     考勤表，记录是否请假
     学员
     """
     __tablename__ = "attendance"
-    id = models.Column(models.Integer, primary_key=True, autoincrement=True)
+    # id = models.Column(models.Integer, primary_key=True, autoincrement=True)
     att_time = models.Column(models.Date)
     status = models.Column(models.Integer,default = 1) #0 迟到  1 正常出勤  2 早退  3 请假  4 旷课
     student_id = models.Column(models.Integer, models.ForeignKey("students.id"))
 
-class Teachers(models.Model):
+class Teachers(BaseModel):
     """
     教师
     老师与课程是多对一关系
     """
     __tablename__ = "teachers"
-    id = models.Column(models.Integer, primary_key=True, autoincrement=True)
+    # id = models.Column(models.Integer, primary_key=True, autoincrement=True)
     name = models.Column(models.String(32))
     age = models.Column(models.Integer)
     gender = models.Column(models.Integer)  # 0 男 1女 -1 unknown
@@ -129,7 +137,20 @@ class Teachers(models.Model):
 
 """删除数据"""
 
-t = Teachers.query.get(3)
-session.delete(t)
-session.commit()
+# t = Teachers.query.get(3)
+# session.delete(t)
+# session.commit()
+
+"""结构优化后保存和删除数据"""
+# t = Teachers()
+# t.name="花花"
+# t.age=26
+# t.gender=1
+# t.course_id=1
+# t.save()
+
+Teachers.query.get(1).delete_obj()
+
+
+
 
