@@ -151,6 +151,9 @@ class Teachers(BaseModel):
 
 Teachers.query.get(1).delete_obj()
 
-
+"""
+Sqllite数据库，在整形的orm类型可以传入字符
+如果是mysql数据库，插入非法类型，比如将字符插入整型，会直接插入0，并且进行waring警告
+"""
 
 
