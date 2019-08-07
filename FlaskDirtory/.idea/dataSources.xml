@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="manage_sys" uuid="f1166ee2-2dcc-46bb-af32-fa202ca01412">
+    <data-source source="LOCAL" name="manage_sys" uuid="2214154d-b138-4ec7-aac6-5a93a745e3b4">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:E:\gitProject\FlaskProject\manage_sys.sqlite</jdbc-url>
+      <jdbc-url>jdbc:sqlite:E:\gitProject\FlaskProject\FlaskDirtory\manage_sys.sqlite</jdbc-url>
       <driver-properties>
         <property name="enable_load_extension" value="true" />
       </driver-properties>
