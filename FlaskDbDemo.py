@@ -36,12 +36,18 @@ class Students(BaseModel):   #学生表
     gender = models.Column(models.Integer) #0 男 1 女 2 unknown
 
 
+
 class Course(BaseModel): #课程
     __tablename__ = "course"
     # id = models.Column(models.Integer,primary_key=True,autoincrement=True)
     label = models.Column(models.String(32))
     description = models.Column(models.Text)
     # stu_id = models.Column(models.Integer,models.ForeignKey(Student.id))
+
+    to_teacher = models.relationship(
+        "Teachers",   #映射表
+        backref = "to_course_data" #反向映射字段，映射表通过该字段可以查到当前表内容
+    )
 
 class Stu_Cou(BaseModel):
     __tablename__ = "stu_cou"
@@ -84,7 +90,7 @@ class Teachers(BaseModel):
 # t1 = Teachers(name="小邓",age=28,gender=1,course_id=1)
 # session.add(t1)
 # session.commit()
-#
+# #
 # t2 = Teachers()
 # t2.name ="小段"
 # t2.age = 23
@@ -92,7 +98,7 @@ class Teachers(BaseModel):
 # t2.course_id = 1
 # session.add_all([t1,t2])
 # session.commit()
-
+#
 # course1 = Course()
 # course1.label ="python"
 # course1.description = "人生苦短，我用Python"
@@ -102,7 +108,7 @@ class Teachers(BaseModel):
 # course3 = Course()
 # course3.label = "php"
 # course3.description = "世界上最好的语言*_*"
-#
+# #
 # session.add_all([course1,course2,course3])
 # session.commit()
 
@@ -149,11 +155,18 @@ class Teachers(BaseModel):
 # t.course_id=1
 # t.save()
 
-Teachers.query.get(1).delete_obj()
+# Teachers.query.get(1).delete_obj()
 
 """
 Sqllite数据库，在整形的orm类型可以传入字符
 如果是mysql数据库，插入非法类型，比如将字符插入整型，会直接插入0，并且进行waring警告
 """
+
+"""一对多映射查询"""
+t = Teachers.query.get(1)
+print(t.to_course_data)
+
+c = Course.query.get(1)
+print(c.to_teacher)
 
 
