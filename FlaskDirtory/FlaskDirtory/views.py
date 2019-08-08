@@ -1,13 +1,16 @@
+from flask import request
+from flask import jsonify
 from flask import redirect
 from flask import render_template
-from flask import request
 
 from FlaskDirtory.main import app
+from FlaskDirtory.main import csrf
 from FlaskDirtory.main import session
+from FlaskDirtory.forms import TeacherForm  #表单类使用
+
 from FlaskDirtory.models import *
 
-from FlaskDirtory.forms import TeacherForm  #表单类使用
-from FlaskDirtory.main import csrf
+
 
 
 def loginvalid(fun):
@@ -21,6 +24,7 @@ def loginvalid(fun):
         return redirect("/login/")
     return inner
 
+@csrf.exempt
 @app.route("/register/",methods=["GET","POST"])
 def register():
     if request.method == "POST":
@@ -37,6 +41,7 @@ def register():
         return redirect("/login/")
     return render_template("register.html")
 
+@csrf.exempt
 @app.route("/login/",methods=["GET","POST"])
 def login():
     if request.method == "POST":
@@ -55,17 +60,20 @@ def login():
     return render_template("login.html")
 
 
+@csrf.exempt
 @app.route("/index/",methods=["GET","POST"])
 @loginvalid
 def index():
 
     return render_template("index.html", **locals())
 
+@csrf.exempt
 @app.route("/student_lists/",methods=["GET","POST"])
 def student_lists():
     user_lists = User.query.filter_by(identify="学生").all()
     return render_template("student_lists.html",**locals())
 
+@csrf.exempt
 @app.route("/teacher_lists/",methods=["GET","POST"])
 def teacher_lists():
     user_lists = User.query.filter_by(identify="教师").all()
@@ -81,9 +89,6 @@ def add_teacher():
         age = form_data.get("age")
         gender = form_data.get("gender")
         course = form_data.get("course")
-        # print("++++++++++++++++++++++++++++++++++++++++++++++++++")
-        # print(username,age,gender,course)
-        # print("++++++++++++++++++++++++++++++++++++++++++++++++++")
 
         teacher = Teacher()
         teacher.username = username
@@ -93,6 +98,38 @@ def add_teacher():
         teacher.save()
         # return redirect("/login/")
     return render_template("add_teacher.html", **locals())
+
+@csrf.error_handler
+@app.route("/csrf_403/",methods=["GET","POST"])
+def csrf_token_error(csrf_error):
+    print(csrf_error)
+    return render_template("csrf_403.html",**locals())
+
+"""ajax前端校验"""
+@app.route("/usernameValid/",methods=["GET","POST"])
+def usernameValid():
+    result = {"code":"","data":""}
+    if request.method=="GET":
+        username = request.args.get("username")
+        if username:
+            user = User.query.filter_by(username=username).first()
+            if user:
+                result["code"] = "400"
+                result["data"] = "用户已存在"
+            else:
+                result["code"] = "200"
+                result["data"] = "可以注册"
+    return jsonify(result)
+
+
+
+
+
+
+
+
+
+
 
 
 
