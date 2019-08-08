@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}
+    添加老师
+{% endblock %}
+{% block content %}
+    <form method="post">
+    {{ teacher_form.csrf_token }}
+        <table class="table table-bordered">
+            <thead>
+            <th>姓名：</th>
+            <th>年龄：</th>
+            <th>电话：</th>
+            <th>科目：</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ teacher_form.name }}</td>
+                <td>{{ teacher_form.age }}</td>
+                <td>{{ teacher_form.gender }}</td>
+                <td>{{ teacher_form.course }}</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4"><input type="submit" value="注册"></td>
+            </tr>
+            </tfoot>
+        </table>
+    </form>
+
+{% endblock %}
