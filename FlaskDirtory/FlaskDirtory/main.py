@@ -21,7 +21,7 @@ pymysql.install_as_MySQLdb()
 #类配置
 app.config.from_object("config.DEBUG_CONFIG")
 
-CSRFProtect(app)   #csrf使用
+csrf=CSRFProtect(app)   #csrf使用
 
 
 

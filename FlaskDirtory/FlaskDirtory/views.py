@@ -7,6 +7,7 @@ from FlaskDirtory.main import session
 from FlaskDirtory.models import *
 
 from FlaskDirtory.forms import TeacherForm  #表单类使用
+from FlaskDirtory.main import csrf
 
 
 def loginvalid(fun):
@@ -70,6 +71,7 @@ def teacher_lists():
     user_lists = User.query.filter_by(identify="教师").all()
     return render_template("student_lists.html", **locals())\
 
+@csrf.exempt
 @app.route("/add_teacher/",methods=["GET","POST"])
 def add_teacher():
     teacher_form = TeacherForm()
