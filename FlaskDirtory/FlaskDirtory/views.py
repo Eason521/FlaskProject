@@ -27,19 +27,25 @@ def loginvalid(fun):
 @csrf.exempt
 @app.route("/register/",methods=["GET","POST"])
 def register():
+    result={"data":""}
     if request.method == "POST":
         form_data = request.form
         username = form_data.get("username")
-        password = form_data.get("password")
-        identify = form_data.get("identify")
+        if username:
+            user = User.query.filter_by(username=username).first()
+            if user:
+                result["data"]="用户存在"
+            else:
+                password = form_data.get("password")
+                identify = form_data.get("identify")
 
-        user = User()
-        user.username = username
-        user.password = password
-        user.identify = identify
-        user.save()
-        return redirect("/login/")
-    return render_template("register.html")
+                user = User()
+                user.username = username
+                user.password = password
+                user.identify = identify
+                user.save()
+                return redirect("/login/")
+    return render_template("register.html",**locals())
 
 @csrf.exempt
 @app.route("/login/",methods=["GET","POST"])
@@ -67,13 +73,11 @@ def index():
 
     return render_template("index.html", **locals())
 
-@csrf.exempt
 @app.route("/student_lists/",methods=["GET","POST"])
 def student_lists():
     user_lists = User.query.filter_by(identify="学生").all()
     return render_template("student_lists.html",**locals())
 
-@csrf.exempt
 @app.route("/teacher_lists/",methods=["GET","POST"])
 def teacher_lists():
     user_lists = User.query.filter_by(identify="教师").all()
@@ -96,7 +100,7 @@ def add_teacher():
         teacher.gender = gender
         teacher.course_id = int(course)
         teacher.save()
-        # return redirect("/login/")
+        return redirect("/teacher_lists/")
     return render_template("add_teacher.html", **locals())
 
 @csrf.error_handler
@@ -105,10 +109,11 @@ def csrf_token_error(csrf_error):
     print(csrf_error)
     return render_template("csrf_403.html",**locals())
 
-"""ajax前端校验"""
 @app.route("/usernameValid/",methods=["GET","POST"])
 def usernameValid():
+
     result = {"code":"","data":""}
+    # ajax前端校验get请求
     if request.method=="GET":
         username = request.args.get("username")
         if username:
@@ -119,9 +124,19 @@ def usernameValid():
             else:
                 result["code"] = "200"
                 result["data"] = "可以注册"
+    # ajax前端校验post请求
+    elif request.method == "POST":
+        username = request.form.get("username")
+        if username:
+            user = User.query.filter_by(username=username).first()
+            if user:
+                result["code"] = "400"
+                result["data"] = "用户已存在"
+            else:
+                result["code"] = "200"
+                result["data"] = "可以注册"
+
     return jsonify(result)
-
-
 
 
 

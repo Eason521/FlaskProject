@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
+    <title>注册</title>
 
     <!-- Custom fonts for this template-->
     <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -40,6 +40,7 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" name="username" id="username"
                                        placeholder="用户名">
+                                {{ result.data }}
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" name="password"
@@ -84,6 +85,43 @@
     $("#username").blur(
         function () {
             var username = $("#username").val();
+            var url = "/usernameValid/";
+            var sendData = {
+                  "username": username,
+                  "csrf_token": '{{ csrf_token() }}'
+              };
+            $.ajax(
+                {
+                    url: url,
+                    type: "post",
+                    data: sendData,
+                    success: function (data) {
+                        console.log(data.data);
+                        if (data.code==400){
+                            $("#submit").attr("disabled",true)
+                        }else{
+                            $("#submit").attr("disabled",false)
+                        }
+                        $("#ts").text(data.data)
+                    },
+                    error: function (error) {
+                        console.log(error)
+
+                    }
+                }
+            )
+        }
+    )
+</script>
+
+</body>
+
+</html>
+<!--
+{#get请求#}
+    $("#username").blur(
+        function () {
+            var username = $("#username").val();
             var url = "/usernameValid/?username=" + username;
             $.ajax(
                 {
@@ -106,11 +144,4 @@
                 }
             )
         }
-    )
-
-</script>
-
-</body>
-
-</html>
-
+    );
