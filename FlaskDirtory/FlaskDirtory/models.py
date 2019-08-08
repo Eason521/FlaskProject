@@ -1,17 +1,17 @@
 from FlaskDirtory.main import models
 
-session = models.session()
+db = models.session()
 
 class BaseModel(models.Model):
     __abstract__ = True #抽象表为True 代表当前类为抽象类，不会创建表
     id = models.Column(models.Integer,primary_key=True,autoincrement=True)
 
     def save(self):
-        session.add(self)
-        session.commit()
+        db.add(self)
+        db.commit()
     def delete_obj(self):
-        session.delete(self)
-        session.commit()
+        db.delete(self)
+        db.commit()
 
 class User(BaseModel):   #学生表
     __tablename__ = "user"  #表名称

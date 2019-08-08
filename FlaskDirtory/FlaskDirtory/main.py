@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask
-
+from flask import session
 from flask_sqlalchemy import SQLAlchemy
 
 app=Flask(__name__)
@@ -14,7 +14,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 # py文件配置方式
-app.config.from_pyfile("settings")
+# app.config.from_pyfile("settings.py")
 app.config.from_object("config.DEBUG_CONFIG")
 
 

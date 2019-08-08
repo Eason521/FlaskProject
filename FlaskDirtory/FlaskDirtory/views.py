@@ -3,9 +3,20 @@ from flask import render_template
 from flask import request
 
 from FlaskDirtory.main import app
+from FlaskDirtory.main import session
 from FlaskDirtory.models import *
 
 
+def loginvalid(fun):
+    def inner(*args,**kwargs):
+        cookie_username = request.cookies.get("username")
+        cookie_user_id = request.cookies.get("user_id")
+        session_username = session.get("username")
+        if cookie_username and cookie_user_id and session_username:
+            if cookie_username == session_username:
+                return fun(*args,**kwargs)
+        return redirect("/login/")
+    return inner
 
 @app.route("/register/",methods=["GET","POST"])
 def register():
@@ -30,14 +41,19 @@ def login():
         username = form_data.get("username")
         password = form_data.get("password")
         if username and password:
+            user = User.query.filter_by(username = username).first()
+            user_id = user.id
+            print(user)
             response = redirect("/index/")
             response.set_cookie("username",username)
-
+            response.set_cookie("user_id",str(user_id))
+            session["username"] = username
             return response
     return render_template("login.html")
 
 
 @app.route("/index/",methods=["GET","POST"])
+@loginvalid
 def index():
 
     return render_template("index.html", **locals())
