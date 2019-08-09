@@ -18,17 +18,11 @@ app.register_blueprint(simple_blueprint1)
 manager = Manager(app) #app命令行序列化
 
 @manager.command
-def hello(name = "creat_add_user"):
+def add_command(name = "creat_add_user"):
     username = input("username :")
     password = input("password :")
     email = input("email :")
-
-
-
-
-
-
-
+    return "执行%s成功"%name
 
 
 
@@ -37,5 +31,5 @@ if __name__ == '__main__':
 
 """
 命令行启动
-python manage.py runserver
+python manage.py runserver [--ip] [--port]
 """
