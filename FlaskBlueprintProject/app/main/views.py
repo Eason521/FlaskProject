@@ -12,6 +12,7 @@ from app.models import *
 
 
 
+
 def loginvalid(fun):
     def inner(*args,**kwargs):
         cookie_username = request.cookies.get("username")
@@ -77,6 +78,12 @@ def student_lists():
     user_lists = User.query.filter_by(identify="学生").all()
     return render_template("student_lists.html",**locals())
 
+#路由带参数
+@main.route("/student_list/<int:id>",methods=["GET","POST"])
+def student_list(id):
+    students = Students.query.filter_by().all()
+    return render_template("student_lists.html",**locals())
+
 @main.route("/teacher_lists/",methods=["GET","POST"])
 def teacher_lists():
     user_lists = User.query.filter_by(identify="教师").all()
@@ -93,7 +100,7 @@ def add_teacher():
         gender = form_data.get("gender")
         course = form_data.get("course")
 
-        teacher = Teacher()
+        teacher = Teachers()
         teacher.username = username
         teacher.age = int(age)
         teacher.gender = gender
