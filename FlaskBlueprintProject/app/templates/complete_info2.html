@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}
+    补充学生信息
+{% endblock %}
+{% block content %}
+    <form method="post">
+    {{ student_form.csrf_token }}
+        <table class="table table-bordered">
+            <thead>
+            <th>姓名：</th>
+            <th>年龄：</th>
+            <th>电话：</th>
+            <th></th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ student_form.name }}</td>
+                <td>{{ student_form.age }}</td>
+                <td>{{ student_form.gender }}</td>
+                <td></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4"><input type="submit" value="注册"></td>
+            </tr>
+            </tfoot>
+        </table>
+    </form>
+
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-    添加老师
+    补充老师信息
 {% endblock %}
 {% block content %}
     <form method="post">
@@ -9,15 +9,23 @@
             <thead>
             <th>姓名：</th>
             <th>年龄：</th>
-            <th>电话：</th>
+            <th>性别：</th>
             <th>科目：</th>
+            <th></th>
             </thead>
             <tbody>
             <tr>
                 <td>{{ teacher_form.name }}</td>
                 <td>{{ teacher_form.age }}</td>
                 <td>{{ teacher_form.gender }}</td>
-                <td>{{ teacher_form.course }}</td>
+                <td>
+                    <select name="course" class="form-control">
+                        {% for cou in courses %}
+                        <option value="{{ cou.id }}">{{ cou.label }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td></td>
             </tr>
             </tbody>
             <tfoot>

@@ -18,7 +18,10 @@ class TeacherForm(FlaskForm):
     """
     # course = Course.query.all()
     # cou_list = [(cou.id, cou.course_name) for cou in course]
-    cou_list = []
+
+    """表单类不能查询数据库，所以先手写类型，注意与数据库一致"""
+    # list=[1,2,3,4,5,6]
+    # cou_list = ["python","java","php","c","go","web"]
     name = wtforms.StringField("教师姓名",
                                render_kw = {
                                    "class": "form-control",
@@ -41,17 +44,43 @@ class TeacherForm(FlaskForm):
     gender = wtforms.StringField("教师性别",
                                 render_kw = {
                                     "class": "form-control",
-                                    "placeholder": "教师年龄"
+                                    "placeholder": "教师性别"
                                 },
                                 validators=[
                                      validators.DataRequired("性别不可以为空")
                                 ]
     )
 
-    course = wtforms.SelectField(
-        "学科",
-        choices=cou_list,
-        render_kw={
-            "class": "form-control",
-        }
+
+class StudentForm(FlaskForm):
+
+    name = wtforms.StringField("学生姓名",
+                               render_kw = {
+                                   "class": "form-control",
+                                   "placeholder": "学生姓名",
+
+                               },
+                               validators = [
+                                   validators.DataRequired("姓名不可以为空")
+                               ]
     )
+    age = wtforms.IntegerField("学生年龄",
+                               render_kw={
+                                   "class": "form-control",
+                                   "placeholder": "学生年龄"
+                               },
+                               validators=[
+                                   validators.DataRequired("年龄不可以为空")
+                               ]
+    )
+    gender = wtforms.StringField("学生性别",
+                                render_kw = {
+                                    "class": "form-control",
+                                    "placeholder": "学生性别"
+                                },
+                                validators=[
+                                     validators.DataRequired("性别不可以为空")
+                                ]
+    )
+
+

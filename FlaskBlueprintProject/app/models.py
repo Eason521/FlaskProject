@@ -1,7 +1,6 @@
 from app import models
 
 
-
 class BaseModel(models.Model):
     __abstract__ = True #抽象表为True 代表当前类为抽象类，不会创建表
     id = models.Column(models.Integer,primary_key=True,autoincrement=True)
@@ -19,6 +18,7 @@ class User(BaseModel):   #学生表
     username = models.Column(models.String(32))
     password = models.Column(models.String(32))
     identify = models.Column(models.String(32))
+    identify_id = models.Column(models.Integer,nullable=True)
 
 
 class Teachers(BaseModel):  #教师表
@@ -27,12 +27,14 @@ class Teachers(BaseModel):  #教师表
     age = models.Column(models.Integer)
     gender = models.Column(models.String(32))
     course_id = models.Column(models.Integer,models.ForeignKey("course.id"))
+    teacher_id = models.Column(models.Integer,models.ForeignKey("user.identify_id"))
 
 class Students(BaseModel):   #学生表
     __tablename__ = "students"  #表名称
     name = models.Column(models.String(32))
     age = models.Column(models.Integer)
     gender = models.Column(models.Integer) #0 男 1 女 2 unknown
+    student_id = models.Column(models.Integer,models.ForeignKey("user.identify_id"))
 
 
 Stu_Cou = models.Table(
