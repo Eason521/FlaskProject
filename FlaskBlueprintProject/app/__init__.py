@@ -14,6 +14,8 @@ def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object("settings.DEBUG_CONFIG")
 
+    # app.run(threading=True)  #小型项目优化多线程，大型项目时在manage中修改优化
+
     #惰性加载
     csrf.init_app(app)
     models.init_app(app)
