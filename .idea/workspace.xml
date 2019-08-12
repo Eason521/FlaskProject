@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79f78d6b-a570-40e0-93ce-2b6f6dca484a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/coroutine_demo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskBlueprintProject/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskBlueprintProject/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/.idea/dataSources/24a60326-d10b-4575-be9e-43c545ac5213.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/.idea/dataSources/24a60326-d10b-4575-be9e-43c545ac5213/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskBlueprintProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/app/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskBlueprintProject/app/main/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskBlueprintProject/app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskBlueprintProject/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/manage_sys.sqlite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/migrations/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/migrations/alembic.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/migrations/env.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/migrations/script.py.mako" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskBlueprintProject/migrations/versions/547c46f5ba87_.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,8 +51,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/coroutine_demo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
-              <caret line="87" column="13" lean-forward="true" selection-start-line="87" selection-start-column="13" selection-end-line="87" selection-end-column="13" />
+            <state relative-caret-position="481">
+              <caret line="46" column="44" lean-forward="true" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -273,23 +258,22 @@
       <workItem from="1565052685166" duration="23859000" />
       <workItem from="1565140433725" duration="7749000" />
       <workItem from="1565156342131" duration="1212000" />
-      <workItem from="1565573727219" duration="3053000" />
+      <workItem from="1565573727219" duration="3299000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53024000" />
+    <option name="totallyTimeSpent" value="53270000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="524" y="18" width="896" height="728" extended-state="0" />
-    <editor active="true" />
+    <frame x="389" y="35" width="896" height="728" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27392346" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1076555" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3295082" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4023569" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.6043771" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3986014" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -391,8 +375,8 @@
     <entry file="file://$PROJECT_DIR$/FlaskDirtory/models.py" />
     <entry file="file://$PROJECT_DIR$/coroutine_demo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="87" column="13" lean-forward="true" selection-start-line="87" selection-start-column="13" selection-end-line="87" selection-end-column="13" />
+        <state relative-caret-position="481">
+          <caret line="46" column="44" lean-forward="true" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
         </state>
       </provider>
     </entry>
