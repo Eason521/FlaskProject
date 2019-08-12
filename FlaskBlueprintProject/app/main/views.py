@@ -1,19 +1,23 @@
+import hashlib
+
 from flask import request
 from flask import jsonify
 from flask import redirect
 from flask import render_template
 from flask import session
+from .. import cache
 
 from . import main
 from app import csrf
 from  app.main.forms import TeacherForm  #表单类使用
 from app.models import *
 
+def setPassword(password):
+    md5 = hashlib.md5()
+    md5.update(password.encode())
+    return md5.hexdigest()
 
-
-
-
-def loginvalid(fun):
+def loginValid(fun):
     def inner(*args,**kwargs):
         cookie_username = request.cookies.get("username")
         cookie_user_id = request.cookies.get("user_id")
@@ -49,6 +53,7 @@ def register():
 
 @csrf.exempt
 @main.route("/login/",methods=["GET","POST"])
+# @cache.cached(timeout=50)
 def login():
     if request.method == "POST":
         form_data = request.form
@@ -63,32 +68,37 @@ def login():
             response.set_cookie("user_id",str(user_id))
             session["username"] = username
             return response
-    return render_template("login.html")
-
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    return render_template("login.html",**locals())
 
 @csrf.exempt
 @main.route("/index/",methods=["GET","POST"])
-@loginvalid
+@cache.cached(timeout=50)
+@loginValid
 def index():
 
     return render_template("index.html", **locals())
 
+@loginValid
 @main.route("/student_lists/",methods=["GET","POST"])
 def student_lists():
     user_lists = User.query.filter_by(identify="学生").all()
     return render_template("student_lists.html",**locals())
 
 #路由带参数
+@loginValid
 @main.route("/student_list/<int:id>",methods=["GET","POST"])
 def student_list(id):
     students = Students.query.filter_by().all()
     return render_template("student_lists.html",**locals())
 
+@loginValid
 @main.route("/teacher_lists/",methods=["GET","POST"])
 def teacher_lists():
     user_lists = User.query.filter_by(identify="教师").all()
     return render_template("student_lists.html", **locals())\
 
+@loginValid
 @csrf.exempt
 @main.route("/add_teacher/",methods=["GET","POST"])
 def add_teacher():
@@ -152,6 +162,13 @@ def base():
     return render_template("base.html",**locals())
 
 
+
+# @main.route("/cache/",methods=["GET","POST"])
+# @cache.cached(timeout=10)
+# def cache_demo():
+#     a=10
+#     print(a)
+#     return render_template("base.html")
 
 
 

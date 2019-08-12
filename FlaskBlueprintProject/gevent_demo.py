@@ -17,7 +17,7 @@
 # gevent.joinall([t1,t2])
 
 
-# 进程锁
+# 锁
 import gevent
 from gevent.lock import Semaphore  #锁
 sem = Semaphore(1) #实例化一个锁

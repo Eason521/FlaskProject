@@ -1,13 +1,14 @@
 from flask_wtf import CSRFProtect
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_cache import Cache
 
 # import  pymysql
 # pymysql.install_as_MySQLdb()
 
 csrf = CSRFProtect()
 models = SQLAlchemy()
+cache = Cache()
 
 def create_app(config_name):
     """创建app"""
@@ -19,6 +20,7 @@ def create_app(config_name):
     #惰性加载
     csrf.init_app(app)
     models.init_app(app)
+    cache.init_app(app)
 
     #注册蓝图
     from .main import main as mainBlueProject

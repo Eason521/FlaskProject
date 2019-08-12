@@ -9,7 +9,7 @@ class BASE_CONFIG():
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SECRET_KEY = "Tanyxn"  #用来生成sessionid 和csrf_token 必须加的配置
-
+    CACHE_TYPE="simple"
 class DEBUG_CONFIG(BASE_CONFIG):
     DEBUG = True
 
